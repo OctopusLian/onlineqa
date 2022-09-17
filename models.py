@@ -4,7 +4,6 @@ from utils import constants
 
 db = SQLAlchemy()
 
-
 class User(db.Model):
     """ 用户模型 """
     __tablename__ = 'accounts_user'
@@ -27,8 +26,7 @@ class User(db.Model):
     # 创建时间
     created_at = db.Column(db.DateTime, default=datetime.now)
     # 最后修改的时间
-    updated_at = db.Column(db.DateTime,
-                           default=datetime.now, onupdate=datetime.now)
+    updated_at = db.Column(db.DateTime,default=datetime.now, onupdate=datetime.now)
     # profile = db.relationship('UserProfile')
 
     @property
@@ -68,7 +66,8 @@ class UserProfile(db.Model):
     # 创建时间
     created_at = db.Column(db.DateTime, default=datetime.now)
     # 最后修改的时间
-    updated_at = db.Column(db.DateTime,default=datetime.now, onupdate=datetime.now)
+    updated_at = db.Column(db.DateTime,
+                           default=datetime.now, onupdate=datetime.now)
     # 关联用户
     user_id = db.Column(db.Integer, db.ForeignKey('accounts_user.id'))
     # 建立用户的一对一关系属性user.profile  profile.user
@@ -280,3 +279,4 @@ class QuestionFollow(db.Model):
     user = db.relationship('User', backref=db.backref('question_follow_list', lazy='dynamic'))
     # 建立与问题的一对多属性
     question = db.relationship('Question', backref=db.backref('question_follow_list', lazy='dynamic'))
+

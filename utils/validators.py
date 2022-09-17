@@ -2,6 +2,7 @@ import re
 
 from wtforms import ValidationError
 
+
 def phone_required(form, field):
     """ 自定义的手机号码的验证 """
     # 强制验证用户名为手机号
