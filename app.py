@@ -1,6 +1,7 @@
 from flask import Flask,render_template
 
 app = Flask(__name__, static_folder='assets')
+app.config['SQLALCHEMY_DATABASE_URL'] = 'mysql://root@localhost/onlineqa'
 
 
 @app.route('/')
