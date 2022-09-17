@@ -1,33 +1,14 @@
-from flask import Flask,render_template
+from flask import Flask
 
-app = Flask(__name__, static_folder='assets')
-app.config['SQLALCHEMY_DATABASE_URL'] = 'mysql://root@localhost/onlineqa'
+import accounts
+import qa
+from models import db, User
 
+app = Flask(__name__, static_folder='medias')
+app.config.from_object('conf.Config')
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+db.init_app(app)
 
-@app.route('/follow')
-def follow():
-    return render_template('follow.html')
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-@app.route('/write')
-def write():
-    return render_template('write.html')
-
-@app.route('/mine')
-def mine():
-    return render_template('mine.html')
-
-@app.route('/detail')
-def detail():
-    return render_template('detail.html')
+# 注册蓝图
+app.register_blueprint(accounts, url_prefix='/accounts')
+app.register_blueprint(qa, url_prefix='/qa')
